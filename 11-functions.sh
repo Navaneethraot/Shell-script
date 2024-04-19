@@ -8,4 +8,14 @@ then
     exit 1
 else
     echo " your are Super User"
-fi        
+fi
+
+dnf install mysql -y
+
+if  [ $? -ne 0 ]
+then
+    echo "Installation of mysql..... Failure"
+    exit 1
+ else
+    echo "Installation of mysql .... Success"
+fi       
