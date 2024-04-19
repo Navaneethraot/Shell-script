@@ -1,6 +1,19 @@
 #!bin/bash
 
 USERID=$(id -u)
+TIMESTAMP=$(date +%F-%H-%M-%S)
+SCRIPTNAME=$(echo $0 | cut -d "." -f1)
+LOGFILE=/temp/$SCRIPTNAME-$TIMESTAMP.log
+
+VALIDATE(){
+    if [$1 -ne 0 ]
+then
+    echo "$2.....Failure"
+    exit 1
+else
+    echo "$2....Success"
+fi
+}
 if [$USERID -ne 0 ]
 then
     echo "Please run this script with root access"
@@ -10,21 +23,9 @@ else
 fi
 
 dnf install mysql -y
-
-if [$? -ne 0 ]
-then
-    echo "Installation of mysql .....Failure"
-    exit 1
-else
-    echo "Installation of mysql .....Success"
-fi        
+VALIDATE $? "Installing mysql"
+      
 
 dnf install git -y
 
-if [$? -ne 0 ]
-then
-    echo "Installation of git .....Failure"
-    exit 1
-else
-    echo "Installation of git .....Success"
-fi   
+VALIDATE $? "Installing mysql"
