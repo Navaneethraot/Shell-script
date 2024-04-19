@@ -14,7 +14,7 @@ else
     echo "$2....Success"
 fi
 }
-if [$USERID -ne 0 ]
+if [ $USERID -ne 0 ]
 then
     echo "Please run this script with root access"
     exit 1
